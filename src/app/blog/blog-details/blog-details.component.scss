@@ -1,0 +1,142 @@
+.blog-1_content {
+    top: 0;
+}
+
+.editdelete-div {
+    display: inline-flex;
+    justify-content: start;
+}
+
+.p-size {
+    font-size: 1rem;
+}
+
+.blog-1_subtitle {
+    color: rgba(0, 0, 0, 0.75);
+    margin: initial;
+}
+
+.blog-1_title {
+    direction: ltr;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: initial;
+}
+
+.blog-details {
+    padding: 0rem 12rem;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 992px) {
+    .blog-details {
+        padding: 0rem 0rem;
+    }  
+    .backtoblogs {
+        display: initial !important;
+    }
+}
+
+.backtoblogs {
+    display: none;
+}
+
+.blog-1_text {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.blog-1_avatar-image {
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.blog-1_author {
+    flex-direction: column;
+    padding-left: 0.5em;
+}
+
+.blog-1_footer {
+    bottom: 0;
+    position: relative;
+    display: flex;
+}
+
+.blog-footer_footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blog-1_footer a {
+    font-weight: bold;
+}
+
+.blog-footer_socials {
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+
+// --------------------------------------------------------------
+.icon-button {
+    font-size: 2.5em;
+      background-color: #000;
+      border-radius: 2.6rem;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1.3rem;
+      height: 2.6rem;
+      line-height: 2.6rem;
+      margin: 0 5px;
+      position: relative;
+      text-align: center;
+      width: 2.6rem;
+  }
+  
+  /* Circle */
+  .icon-button span {
+      border-radius: 0;
+      display: block;
+      height: 0;
+      left: 50%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      width: 0;
+  }
+  
+  .icon-button i {
+      background: none;
+      color: white;
+  }
+
+// ===========================
+.edit-button-div {
+    padding: 0rem 5rem;
+}
+
+.rounded-button {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.pen-icon {
+    display: flow-root;
+    font-size: medium !important;
+}
+
+.editblog-icon {
+    display: inline-flex !important;
+    background: #000;
+    color: #fff;
+}

@@ -1,0 +1,47 @@
+<div class="container blog-details p-size">
+    <div class="editdelete-div">
+        <p class="rounded-button btn-group backtoblogs" routerLink='../'>
+            <i class="fas fa-chevron-left editblog-icon"></i> Back to Blogs
+        </p>
+        <p class="rounded-button btn-group pen-icon" (click)="openDialog()">
+            Edit Blog <i class="fas fa-edit editblog-icon"></i>
+        </p>
+        <p class="rounded-button btn-group pen-icon" (click)="deleteBlog(selectedBlog.id)">
+            Delete Blog <i class="fas fa-trash-alt editblog-icon"></i>
+        </p>
+    </div>
+
+    <div class="blog-1_content">
+        <p class="blog-1_subtitle text-muted card-text"><b>{{selectedBlog.category}} </b> . {{selectedBlog.post_date}}
+        </p>
+        <br>
+        <h1 class="card-title blog-1_title">{{selectedBlog.title}}</h1>
+        <br>
+        <div class="blog-body" [innerHTML]="selectedBlog.body"></div>
+        <div class="blog-footer">
+            <p class="blog-footer_footing pt-3rem pb-2rem" *ngIf="selectedBlog.footing"
+                [innerHTML]="selectedBlog.footing"></p>
+            <mat-divider></mat-divider>
+            <div class="blog-footer_footer pt-1rem">
+                <div class="flex">
+                    <img class="blog-1_avatar-image" [src]="selectedBlog.authorImage" alt="image 1">
+                    <div class="blog-1_author">
+                        <p class="blog-1_subtitle"> <b>{{selectedBlog.authorName}}</b></p>
+                        <p class="blog-1_subtitle text-muted"> {{selectedBlog.author_title}}</p>
+                    </div>
+                </div>
+
+                <div class="blog-footer_socials flex"
+                    *ngIf="selectedBlog.authorFacebook || selectedBlog.authorTwitter || selectedBlog.authorLinkedIn">
+                    <p style="padding-right: 0.5rem;">Share:</p>
+                    <a *ngIf="selectedBlog.authorFacebook" [href]="selectedBlog.authorFacebook" target="_blank"
+                        class="icon-button"><i class="fab fa-facebook-f"></i></a>
+                    <a *ngIf="selectedBlog.authorTwitter" [href]="selectedBlog.authorTwitter" target="_blank"
+                        class="icon-button"><i class="fab fa-twitter"></i></a>
+                    <a *ngIf="selectedBlog.authorLinkedIn" [href]="selectedBlog.authorLinkedIn" target="_blank"
+                        class="icon-button"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

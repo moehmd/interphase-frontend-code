@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container p-0">
+        <p class="nav-link navbar-brand nav-banner navbar-links"> Website.com</p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                <li class="nav-item btn-group add-blog" routerLink='/work'>
+                    <p routerLinkActive="active-route" class="nav-link navbar-links">Work</p>
+                </li>
+                <li class="nav-item btn-group add-blog" routerLink='/culture'>
+                    <p routerLinkActive="active-route" class="nav-link navbar-links">Culture</p>
+                </li>
+                <li class="nav-item btn-group add-blog" routerLink='/careers'>
+                    <p routerLinkActive="active-route" class="nav-link navbar-links">Careers</p>
+                </li>
+                <li class="nav-item btn-group add-blog" routerLink='/blogs'>
+                    <p routerLinkActive="active-route" class="nav-link navbar-links">Blog</p>
+                </li>
+                <li class="nav-item" (click)="openDialog()">
+                    <p class="rounded-button btn-group plus-icon">
+                        Add Blog <i class="fas fa-plus addblog-icon"></i>
+                    </p>
+                </li>
+                <li class="nav-item" routerLink='/getintouch'>
+                    <p class="rounded-button btn-group" routerLink='/getintouch'>Get in touch</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>ARE YOU SURE YOU WANT TO DELETE THIS BLOG?</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class='col col-md-6'>
+            <button mat-raised-button color='warn' type="button" class="btn btn-outline-danger btn-block"
+                routerLink="../" (click)="DeleteBlog(data)">Delete</button>
+        </div>
+        <div class='col col-md-6'>
+            <button mat-raised-button color='primary' type="submit" class="btn btn-outline-secondary btn-block"
+                (click)="Cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

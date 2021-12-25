@@ -1,0 +1,53 @@
+<div class="container">
+    <div *ngFor="let blog of blogs; let i=index; first as isLatest">
+        <div class="card row mb-3 blog-1 horizontal-card" *ngIf="isLatest" [routerLink]="['/blogs', blog.id]"
+            [id]="blog.id">
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <img [src]="blog.image_url" class="img-fluid blog-1_img rounded-start" alt="blog primary">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 card-body blog-1_content-section flex">
+                <div class="blog-1_content">
+                    <p class="blog-1_subtitle text-muted card-text"><b>{{blog.category}}</b> . {{blog.post_date}}</p>
+                    <br>
+                    <p class="card-title blog-1_title">{{blog.title}}</p>
+                    <br>
+                    <p class=" blog-1_text">
+                        {{blog.banner}}
+                    </p>
+                </div>
+                <div class="blog-1_footer">
+                    <img class="blog-1_avatar-image" [src]="blog.authorImage" alt="image 1">
+                    <div class="blog-1_author">
+                        <p class="blog-1_subtitle text-muted"> <b>{{blog.authorName}}</b></p>
+                        <p class="blog-1_subtitle text-muted"> {{blog.author_title}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card secondary-blogs_content" *ngIf="!isLatest" [routerLink]="['/blogs', blog.id]" [id]="blog.id">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <img [src]="blog.image_url" class="card-img-top secondary-blogs_image" alt="...">
+                <div class="blog-1_content-section">
+                    <div class="blog-1_content">
+                        <p class="blog-1_subtitle text-muted card-text pt-3"><b>{{blog.category}}</b> .
+                            {{blog.post_date}}</p>
+                        <br>
+                        <p class="card-title blog-1_title">{{blog.title}}</p>
+                        <br>
+                        <p class=" blog-1_text">
+                            {{blog.banner}}
+                        </p>
+                    </div>
+                    <div class="blog-1_footer">
+                        <img class="blog-1_avatar-image" [src]="blog.authorImage" alt="image 1">
+                        <div class="blog-1_author">
+                            <p class="blog-1_subtitle text-muted"> <b>{{blog.authorName}}</b></p>
+                            <p class="blog-1_subtitle text-muted"> {{blog.author_title}}
+                            <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
