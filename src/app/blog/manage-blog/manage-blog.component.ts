@@ -1,9 +1,9 @@
+import { Component, Inject, Optional } from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthorService } from 'src/app/services/author.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Blog } from 'src/app/models/blog';
-import { v4 as uuidv4 } from 'uuid';
-
+import { Author } from 'src/app/models/author';
 
 @Component({
   selector: 'app-manage-blog',
@@ -11,55 +11,78 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./manage-blog.component.scss']
 })
 
-export class ManageBlogComponent implements OnInit {
+export class ManageBlogComponent {
   public blog: Blog = new Blog();
+  public authors: Author[] = [];
+  public selectedAuthor: Author = new Author()
+  blogImageDataURL: any;
+  authorImageDataURL: any;
+  panelOpenState: boolean = false;
 
   constructor(
     private dialogref: MatDialogRef<ManageBlogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private _blogService: BlogService
-  ) {
-    this.blog = this.data;
-  }
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Blog,
+    private _blogService: BlogService,
+    private _authorService: AuthorService,
+  ) { this.blog = this.data };
 
-  ngOnInit(): void {
-  }
 
-  imgName: string = "";
   blogsImage(event: any) {
-    this.imgName = "assets/images/" + event.srcElement.files[0].name;
-    this.blog.image_url = this.imgName;
-  }
-
-  authorImage: string = "";
-  authorsImage(event: any) {
-    this.authorImage = "assets/images/" + event.srcElement.files[0].name;
-    this.blog.authorImage = this.authorImage;
+    const blogImageSelected = event.srcElement.files[0];
+    const blogImgReader = new FileReader();
+    blogImgReader.onload = () => {
+      this.blogImageDataURL = blogImgReader.result as String;
+    };
+    blogImgReader.readAsDataURL(blogImageSelected);
+    this.blog.image_url = blogImageSelected;
   };
 
   ManageBlog(blog: Blog) {
-    if (blog.id) {
-      this._blogService.EditBlog(blog);
+
+    if (blog._id) {
+      this.assignAuthorToBlog();
+      this._blogService.EditBlog(blog._id, blog).subscribe();
+      this.dialogref.close();
     }
     else {
-      blog.id = uuidv4();
-      this._blogService.AddNewBlog(blog);
-      this.reload();
+      this.assignAuthorToBlog();
+      this._blogService.AddBlog(blog).subscribe();
+      this.dialogref.close([]);
     };
-    this.dialogref.close([]);
-    //this._blogService.GetBlogs();
-    return;
+
+    this.reload();
+  };
+
+  getAuthorsList() {
+    this._authorService.GetAllAuthors().subscribe(res => { this.authors = res });
+  };
+
+  selectAuthor(authorId: string) {
+    this._authorService.GetAuthorById(authorId)
+      .subscribe(res => {
+        this.selectedAuthor = res;
+        delete this.selectedAuthor._id;
+        this.assignAuthorToBlog();
+      });
+    this.toggleExpandPanel();
+  };
+
+  assignAuthorToBlog() {
+    if (this.selectedAuthor && this.selectedAuthor != null) {
+      this.blog = { ...this.blog, ...this.selectedAuthor };
+    };
+  };
+
+  toggleExpandPanel() {
+    this.panelOpenState = !this.panelOpenState;
   };
 
   reload() {
     window.location.reload()
-  }
+  };
 
   Cancel() {
     this.dialogref.close();
   };
 
-  public closeModal(refreshData: boolean) {
-    this.dialogref.close(refreshData);
-  };
 }

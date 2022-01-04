@@ -1,0 +1,64 @@
+table {
+    width: 100%;
+}
+
+.authors-section {
+    font-size: 1.2rem;
+}
+
+.add-author {
+    display: inline-flex;
+    justify-content: start;
+}
+
+.rounded-button {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.add-author_button {
+    display: inline-flex !important;
+    background: #000;
+    color: #fff !important;
+}
+
+.manage-author-icons {
+    padding-right: 0.5rem;
+    font-size: larger;
+}
+
+.authors-avatar {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background-size: cover;
+    margin: 0.5rem 0;
+}
+
+.social-icons {
+    font-size: 2.5em;
+    background-color: #000;
+    color: #fff !important;
+    border-radius: 2.6rem;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.3rem;
+    height: 2.6rem;
+    line-height: 2.6rem;
+    margin: 0 5px;
+    position: relative;
+    text-align: center;
+    width: 2.6rem;
+}
+
+.author-socials-group {
+    flex-direction: row; 
+}

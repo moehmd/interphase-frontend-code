@@ -5,7 +5,6 @@ import { BlogService } from 'src/app/services/blog.service';
 import { MatDialog } from "@angular/material/dialog";
 import { ManageBlogComponent } from 'src/app/blog/manage-blog/manage-blog.component';
 import { Blog } from './../../models/blog';
-import { v4 as uuidv4 } from 'uuid';
 import { DeletedialogComponent } from '../manage-blog/deletedialog/deletedialog.component';
 
 @Component({
@@ -15,9 +14,11 @@ import { DeletedialogComponent } from '../manage-blog/deletedialog/deletedialog.
 })
 
 export class BlogDetailsComponent implements OnInit {
-  selectedBlogId!: number;
+  selectedBlogId!: string;
+  errorHandler: string = "";
   selectedBlog!: Blog;
   private routeSub: Subscription = new Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private _blogService: BlogService,
@@ -28,8 +29,12 @@ export class BlogDetailsComponent implements OnInit {
     this.routeSub = this.route.params.subscribe(params => {
       this.selectedBlogId = params['id'];
     });
-    this._blogService.GetSelectedBlog(this.selectedBlogId).subscribe(data => {
-      this.selectedBlog = data;
+    this._blogService.GetBlogById(this.selectedBlogId).subscribe(data => {
+      if (data) {
+        this.selectedBlog = data;
+      } else {
+        this.errorHandler = "this Id does not match any blog!";
+      }
     });
   }
 
@@ -39,33 +44,21 @@ export class BlogDetailsComponent implements OnInit {
 
   openDialog() {
     const blogDialog = this.dialog.open(ManageBlogComponent, {
-      width: "1000px",
       height: "600px",
       data: this.selectedBlog,
     });
-
-    blogDialog.afterClosed()
-      .subscribe((refreshData) => {
-        if (refreshData) {
-          console.log(refreshData);
-        }
-      });
+    blogDialog.afterClosed().subscribe();
   }
 
   deleteBlog(selectedBlogId: string) {
     const blogDialog = this.dialog.open(DeletedialogComponent, {
-      width: "600px",
-      height: "200px",
       data: selectedBlogId,
     });
+    blogDialog.afterClosed().subscribe(() => { this.reload() });
+  };
 
-    blogDialog.afterClosed()
-      .subscribe((refreshData) => {
-        if (refreshData) {
-          console.log(refreshData);
-        }
-      });
-
-  }
+  reload() {
+    window.location.reload();
+  };
 
 }

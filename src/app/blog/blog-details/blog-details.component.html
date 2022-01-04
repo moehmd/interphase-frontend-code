@@ -1,4 +1,7 @@
-<div class="container blog-details p-size">
+<div *ngIf="!selectedBlog">
+    <h1>{{errorHandler}}</h1>
+</div>
+<div *ngIf="selectedBlog" class="container blog-details p-size">
     <div class="editdelete-div">
         <p class="rounded-button btn-group backtoblogs" routerLink='../'>
             <i class="fas fa-chevron-left editblog-icon"></i> Back to Blogs
@@ -6,7 +9,7 @@
         <p class="rounded-button btn-group pen-icon" (click)="openDialog()">
             Edit Blog <i class="fas fa-edit editblog-icon"></i>
         </p>
-        <p class="rounded-button btn-group pen-icon" (click)="deleteBlog(selectedBlog.id)">
+        <p class="rounded-button btn-group pen-icon" (click)="deleteBlog(selectedBlog._id)">
             Delete Blog <i class="fas fa-trash-alt editblog-icon"></i>
         </p>
     </div>
@@ -19,7 +22,7 @@
         <br>
         <div class="blog-body" [innerHTML]="selectedBlog.body"></div>
         <div class="blog-footer">
-            <p class="blog-footer_footing pt-3rem pb-2rem" *ngIf="selectedBlog.footing"
+            <p class="blog-footer_footing pt-3rem pb-2rem" *ngIf="selectedBlog.footing != 'undefined'"
                 [innerHTML]="selectedBlog.footing"></p>
             <mat-divider></mat-divider>
             <div class="blog-footer_footer pt-1rem">

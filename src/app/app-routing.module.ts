@@ -5,6 +5,7 @@ import { CareersComponent } from 'src/app/components/content/careers/careers.com
 import { CultureComponent } from 'src/app/components/content/culture/culture.component';
 import { WorkComponent } from 'src/app/components/content/work/work.component';
 import { ContactComponent } from 'src/app/components/content/contact/contact.component';
+import { AuthorsComponent } from 'src/app/components/authors/authors.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'blogs', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'careers', component: CareersComponent },
   { path: 'culture', component: CultureComponent },
   { path: 'work', component: WorkComponent },
+  { path: 'authors', component: AuthorsComponent },
   { path: 'getintouch', component: ContactComponent },
 ];
 

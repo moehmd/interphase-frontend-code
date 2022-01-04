@@ -1,7 +1,7 @@
+import { Subscription } from 'rxjs';
 import { BlogService } from './../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../models/blog';
-import blogData from '../../assets/blog.json';
 
 @Component({
   selector: 'app-blog',
@@ -9,21 +9,23 @@ import blogData from '../../assets/blog.json';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
+
   blogs: Blog[] = [];
-  constructor(private _blogService: BlogService) { }
+  private _blogSubscription = new Subscription();
+  constructor(
+    private _blogService: BlogService,
+  ) { }
 
   ngOnInit(): void {
-    this.AddBlogfromService();
-    this.GetBlogsfromService();
-  }
+    this.GetBlogs();
+  };
 
-  AddBlogfromService() {
-    this._blogService.AddBlog(blogData);
-  }
+  GetBlogs() {
+    this._blogService.GetAllBlogs().subscribe(res => { this.blogs = res; });
+  };
 
-  GetBlogsfromService() {
-    this._blogService.GetBlogs().subscribe(data => {
-      this.blogs = data;
-    });
-  }
+  ngOnDestroy() {
+    this._blogSubscription.unsubscribe();
+  };
+
 }

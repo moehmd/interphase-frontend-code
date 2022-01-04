@@ -1,0 +1,33 @@
+.authors {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar-image {
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.author {
+    flex-direction: column;
+    padding-left: 0.5em;
+}
+
+.subtitle {
+    color: rgba(0, 0, 0, 0.54);
+    margin: initial;
+}
+
+.authselected {
+    min-width: max-content;
+}
+
+.author-icons {
+    padding-right: 0.5rem;
+}

@@ -1,10 +1,10 @@
-<i class="fa fa-2x fa-times-circle" (click)="closeModal(true)"></i>
+<i class="fa fa-2x fa-times-circle" (click)="Cancel()"></i>
 <h1 mat-dialog-title>Manage Blog</h1>
 <div mat-dialog-content>
     <form fxLayout='column' #f="ngForm" type="post">
         <div class="row">
             <mat-form-field appearance="outline">
-                <textarea rows="4" cols="100" matInput placeholder="Please add a title" type="text" name="title"
+                <textarea rows="2" cols="100" matInput placeholder="Please add a title" type="text" name="title"
                     [(ngModel)]="blog.title" required></textarea>
                 <mat-label>Title</mat-label>
                 <mat-error>a title is required</mat-error>
@@ -12,17 +12,29 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <textarea rows="4" cols="100" matInput placeholder="Please add a category" type="text" name="category"
-                    [(ngModel)]="blog.category" required></textarea>
+                <input rows="2" cols="100" matInput placeholder="Please add a category" type="text" name="category"
+                    [(ngModel)]="blog.category" required />
                 <mat-label>Category</mat-label>
                 <mat-error>a category is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input rows="2" cols="100" matInput placeholder="post_date" type="date" name="post_date"
+                    [(ngModel)]="blog.post_date" required />
+                <mat-label>set blog's date</mat-label>
+                <mat-error>a date is required</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-label>blog's image</mat-label>
             <mat-form-field appearance="outline">
-                <input type="file" name="files" accept="image/*" (change)="blogsImage($event)">
-                <img width="100%" *ngIf="imgName" [src]="imgName" class="image">
+                <div>
+                    <button mat-button type="button" (click)="blogImgPicker.click()">
+                        Choose Local Image</button>
+                    <input type="file" #blogImgPicker style="visibility: hidden;" name="files" accept="image/*"
+                        (change)="blogsImage($event)">
+                </div>
+                <img width="100%" *ngIf="blogImageDataURL && blogImageDataURL != ''" [src]="blogImageDataURL"
+                    class="image">
                 <input style="display: none;" matInput placeholder="add image" type="text" name="image_url"
                     [(ngModel)]="blog.image_url" required />
                 <mat-error>an image is required</mat-error>
@@ -30,15 +42,7 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <input rows="4" cols="100" matInput placeholder="post_date" type="date" name="post_date"
-                    [(ngModel)]="blog.post_date" required />
-                <mat-label>set blog's date</mat-label>
-                <mat-error>a date is required</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <textarea rows="4" cols="100" matInput placeholder="add a banner" type="text" name="banner"
+                <textarea rows="2" cols="100" matInput placeholder="add a banner" type="text" name="banner"
                     [(ngModel)]="blog.banner" required></textarea>
                 <mat-label>banner</mat-label>
                 <mat-error>a banner is required</mat-error>
@@ -46,7 +50,7 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <textarea rows="4" cols="100" matInput placeholder="body" type="text" name="body"
+                <textarea rows="6" cols="100" matInput placeholder="body" type="text" name="body"
                     [(ngModel)]="blog.body" required></textarea>
                 <mat-label>blog's body</mat-label>
                 <mat-error>a body for the blog is required</mat-error>
@@ -54,59 +58,46 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <textarea rows="4" cols="100" rows="4" cols="100" matInput placeholder="footing" type="text"
+                <textarea rows="2" cols="100" rows="4" cols="100" matInput placeholder="footing" type="text"
                     name="footing" [(ngModel)]="blog.footing"></textarea>
                 <mat-label>footing</mat-label>
             </mat-form-field>
         </div>
         <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Author Name" type="text" name="authorName" [(ngModel)]="blog.authorName"
-                    required />
-                <mat-label>Author Name</mat-label>
-                <mat-error>Author Name is required </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Author Title" type="text" name="author_title"
-                    [(ngModel)]="blog.author_title" required />
-                <mat-label>Author title</mat-label>
-                <mat-error>Author title is required </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-label>author's profile image</mat-label>
-            <mat-form-field appearance="outline">
-                <input type="file" name="files" accept="image/*" (change)="authorsImage($event)">
-                <img width="100%" *ngIf="authorImage" [src]="authorImage" class="image">
-                <input style="display: none;" matInput placeholder="author's profile image" type="text"
-                    name="authorImage" [(ngModel)]="blog.authorImage" required />
-                <mat-error>add an image of your author</mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Facebook" type="text" name="authorFacebook"
-                    [(ngModel)]="blog.authorFacebook" />
-                <mat-label>Author's Facebook profile</mat-label>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Twitter" type="text" name="authorTwitter"
-                    [(ngModel)]="blog.authorTwitter" />
-                <mat-label>Author's Twitter profile</mat-label>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="linkedIn" type="text" name="authorLinkedIn"
-                    [(ngModel)]="blog.authorLinkedIn" />
-                <mat-label>Author's Linkedin profile</mat-label>
-            </mat-form-field>
-        </div>
-
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="panelOpenState">
+                    <mat-expansion-panel-header (click)="getAuthorsList()">
+                        <mat-panel-title style="align-items: center;">
+                            Select Author
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div *ngIf="selectedAuthor.authorImage && selectedAuthor.authorImage != null">
+                                <div [id]="selectedAuthor._id" class="flex pb-05rem pt-05rem authselected">
+                                    <img class="avatar-image"
+                                        *ngIf="selectedAuthor.authorImage && selectedAuthor.authorImage != null"
+                                        [src]="selectedAuthor.authorImage" [alt]="selectedAuthor.authorName">
+                                    <div class="author">
+                                        <p class="subtitle text-muted"> <b>{{selectedAuthor.authorName}}</b></p>
+                                        <p class="subtitle text-muted">{{selectedAuthor.author_title}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <div class="authors" *ngFor="let author of authors">
+                            <div [id]="author._id" class="flex" (click)="selectAuthor(author._id)">
+                                <img class="avatar-image" [src]="author.authorImage" [alt]="author.authorName">
+                                <div class="author">
+                                    <p class="subtitle text-muted"> <b>{{author.authorName}}</b></p>
+                                    <p class="subtitle text-muted">{{author.author_title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div><br>
 
         <div class="row">
             <div class='col col-md-6'>

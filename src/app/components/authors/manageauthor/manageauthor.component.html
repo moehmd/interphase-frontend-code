@@ -1,0 +1,80 @@
+<i class="fa fa-2x fa-times-circle" (click)="Cancel()"></i>
+<h1 mat-dialog-title>Manage Authors</h1>
+
+<div *ngIf="authorImageDataURL" class="show-author">
+
+</div>
+
+<div mat-dialog-content>
+    <form fxLayout='column' #f="ngForm" type="post">
+        <div class="row">
+            <mat-label>Author's Avatar</mat-label>
+            <mat-form-field appearance="outline">
+                <div>
+                    <button mat-button type="button" (click)="authorImgPicker.click()">
+                        Choose Local Image</button>
+                    <input type="file" #authorImgPicker style="visibility: hidden;" name="files" accept="image/*"
+                        (change)="authorsImage($event)">
+                </div>
+                <img width="100%" *ngIf="authorImageDataURL && authorImageDataURL != ''" [src]="authorImageDataURL"
+                    class="author-image">
+                <input style="display: none;" matInput placeholder="add image" type="text" name="image_url"
+                    [(ngModel)]="author.authorImage" required />
+                <mat-error>an image is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <textarea rows="2" cols="100" matInput placeholder="author's name" type="text" name="title"
+                    [(ngModel)]="author.authorName" required></textarea>
+                <mat-label>author's name</mat-label>
+                <mat-error>author's name is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <input rows="2" cols="100" matInput placeholder="Please add a title" type="text" name="category"
+                    [(ngModel)]="author.author_title" required />
+                <mat-label>Title</mat-label>
+                <mat-error>a title is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <textarea rows="2" cols="100" matInput placeholder="Facebook" type="text" name="banner"
+                    [(ngModel)]="author.authorFacebook"></textarea>
+                <mat-label>Facebook</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <textarea rows="2" cols="100" matInput placeholder="Twitter" type="text" name="banner"
+                    [(ngModel)]="author.authorTwitter" equired></textarea>
+                <mat-label>Twitter</mat-label>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <textarea rows="2" cols="100" matInput placeholder="LinkedIn" type="text" name="banner"
+                    [(ngModel)]="author.authorLinkedIn" equired></textarea>
+                <mat-label>LinkedIn</mat-label>
+            </mat-form-field>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class='col col-md-6'>
+                <button [disabled]='!f.valid' mat-raised-button color='primary' type="submit"
+                    class="btn btn-outline-secondary btn-block" (click)="ManageAuthor(author)">Save</button>
+            </div>
+            <div class='col col-md-6'>
+                <button mat-raised-button color='warn' type="button" class="btn btn-outline-danger btn-block"
+                    (click)="Cancel()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

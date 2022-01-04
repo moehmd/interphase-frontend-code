@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { ManageBlogComponent } from 'src/app/blog/manage-blog/manage-blog.component';
 
@@ -7,25 +7,19 @@ import { ManageBlogComponent } from 'src/app/blog/manage-blog/manage-blog.compon
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private _dialog: MatDialog,
+  ) { }
 
-  ngOnInit(): void {
-  }
-
-  openDialog() {
-    const blogDialog = this.dialog.open(ManageBlogComponent, {
-      width: "1000px",
-      height: "800px",
+  addBlog() {
+    const blogDialog = this._dialog.open(ManageBlogComponent, {
+      height: "600px",
       data: {},
     });
-    blogDialog.afterClosed()
-      .subscribe((refreshData) => {
-        if (refreshData) {
-          console.log(refreshData);
-        }
-      });
-  }
+
+    blogDialog.afterClosed().subscribe();
+  };
 
 }
